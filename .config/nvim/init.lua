@@ -1,0 +1,5 @@
+require('packages')
+require('globals')
+require('options')
+require('mappings')
+require('colorscheme')
