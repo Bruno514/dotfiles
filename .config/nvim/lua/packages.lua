@@ -4,7 +4,10 @@ if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
+
+
 require("packer").startup(function()
+
   use 'wbthomason/packer.nvim'
 
   use {
@@ -65,6 +68,19 @@ require("packer").startup(function()
   use {'molleweide/LuaSnip-snippets.nvim',
     config = function() require("setup/snippets") end
   }
+
+  use 'navarasu/onedark.nvim'
+
+  use 'akinsho/toggleterm.nvim'
+
+  use 'marko-cerovac/material.nvim'
+
+  use{ 'anuvyklack/pretty-fold.nvim', requires = 'anuvyklack/nvim-keymap-amend', config = function()
+      require('pretty-fold').setup()
+      require('pretty-fold.preview').setup()
+   end}
+
+   use 'sainnhe/gruvbox-material'
 
   if packer_bootstrap then
     require('packer').sync()

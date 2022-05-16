@@ -1,6 +1,7 @@
 -- remaps
 local opts = { noremap = true , silent = true}
 local keymap = vim.api.nvim_set_keymap
+local bufkeymap = vim.api.nvim_buf_set_keymap
 
 keymap('n', '<C-s>', ':w<CR>', {})
 keymap('i', '<C-s>', '<ESC>:w<CR>', {})
@@ -32,3 +33,18 @@ keymap('n', '<space>fm', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
 -- Packer 
 keymap('n', '<space>ps', '<cmd>PackerSync<CR>', opts)
+
+keymap('n', '<space>t', '<cmd>ToggleTerm<CR>', opts)
+
+function _G.set_terminal_keymaps()
+  local opts = {noremap = true}
+  bufkeymap(0, 't', '<leader><Esc>', [[<C-\><C-n>]], opts)
+  bufkeymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+  bufkeymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+  bufkeymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+  bufkeymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+  bufkeymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
